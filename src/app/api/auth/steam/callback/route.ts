@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { prisma } from "@/lib/prisma";
 
 function extractSteamId(claimedId: string | null) {
   return claimedId?.match(/\/openid\/id\/(\d+)$/)?.[1] ?? null;
@@ -24,14 +25,40 @@ export async function GET(request: NextRequest) {
     return NextResponse.redirect(new URL("/login?steam=failed", request.nextUrl.origin));
   }
 
+  let storedUser: { steamId64: string | null; username: string | null; role: string; bonusBalanceCents: number; bonusCurrency: string } | null = null;
+  try {
+    storedUser = await prisma.user.upsert({
+      where: { steamId64 },
+      update: {
+        username: `Steam ${steamId64}`
+      },
+      create: {
+        steamId64,
+        username: `Steam ${steamId64}`,
+        role: "USER"
+      },
+      select: {
+        steamId64: true,
+        username: true,
+        role: true,
+        bonusBalanceCents: true,
+        bonusCurrency: true
+      }
+    });
+  } catch {
+    storedUser = null;
+  }
+
   const response = NextResponse.redirect(new URL("/profile?steam=success", request.nextUrl.origin));
   response.cookies.set(
     "dayz_nord_user",
     JSON.stringify({
       steamId64,
-      username: `Steam ${steamId64}`,
-      role: "USER",
-      provider: "steam"
+      username: storedUser?.username ?? `Steam ${steamId64}`,
+      role: storedUser?.role ?? "USER",
+      provider: "steam",
+      bonusBalanceCents: storedUser?.bonusBalanceCents ?? 0,
+      bonusCurrency: storedUser?.bonusCurrency ?? "EUR"
     }),
     {
       httpOnly: true,

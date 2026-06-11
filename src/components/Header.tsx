@@ -29,7 +29,7 @@ export function Header() {
     ["/store", t.store],
     ["/cart", t.cart],
     ["/login", t.login],
-    ["/profile", t.profile],
+    ["/profile/enter", t.profile],
     ["/admin", "Admin"]
   ] as const;
 

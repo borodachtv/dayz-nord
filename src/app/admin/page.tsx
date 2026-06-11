@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { AdminUsersPanel } from "@/components/AdminUsersPanel";
 import { products, servers, storeCategories } from "@/lib/site-data";
 
 function Field({ label, placeholder, type = "text" }: { label: string; placeholder: string; type?: string }) {
@@ -102,6 +103,9 @@ export default function AdminProductsPage() {
             })}
           </div>
         </section>
+      </div>
+      <div className="mx-auto max-w-7xl px-4 pb-10 sm:px-6 lg:px-10">
+        <AdminUsersPanel />
       </div>
     </main>
   );

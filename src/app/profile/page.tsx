@@ -1,5 +1,6 @@
 import { cookies } from "next/headers";
 import { PageShell } from "@/components/PageShell";
+import { prisma } from "@/lib/prisma";
 
 const orders = [
   ["#DN-1001", "Priority Queue", "Pending"],
@@ -9,7 +10,27 @@ const orders = [
 export default async function ProfilePage() {
   const cookieStore = await cookies();
   const userCookie = cookieStore.get("dayz_nord_user")?.value ?? cookieStore.get("dayz_nord_mock_user")?.value;
-  const user = userCookie ? (JSON.parse(userCookie) as { steamId64: string; username: string; role: string; provider?: string }) : null;
+  const cookieUser = userCookie ? (JSON.parse(userCookie) as { steamId64: string; username: string; role: string; provider?: string; bonusBalanceCents?: number; bonusCurrency?: string }) : null;
+  let dbUser: { bonusBalanceCents: number; bonusCurrency: string } | null = null;
+
+  if (cookieUser?.steamId64) {
+    try {
+      dbUser = await prisma.user.findUnique({
+        where: { steamId64: cookieUser.steamId64 },
+        select: { bonusBalanceCents: true, bonusCurrency: true }
+      });
+    } catch {
+      dbUser = null;
+    }
+  }
+
+  const user = cookieUser
+    ? {
+        ...cookieUser,
+        bonusBalanceCents: dbUser?.bonusBalanceCents ?? cookieUser.bonusBalanceCents ?? 0,
+        bonusCurrency: dbUser?.bonusCurrency ?? cookieUser.bonusCurrency ?? "EUR"
+      }
+    : null;
 
   return (
     <PageShell>
@@ -29,6 +50,7 @@ export default async function ProfilePage() {
               <div><dt className="text-nord-smoke">Username</dt><dd className="text-nord-ice">{user?.username ?? "Guest"}</dd></div>
               <div><dt className="text-nord-smoke">Provider</dt><dd className="text-nord-ice">{user?.provider ?? "NONE"}</dd></div>
               <div><dt className="text-nord-smoke">Role</dt><dd className="text-nord-ice">{user?.role ?? "NONE"}</dd></div>
+              <div><dt className="text-nord-smoke">Bonus balance</dt><dd className="text-nord-amber">{user ? new Intl.NumberFormat("en-US", { style: "currency", currency: user.bonusCurrency, maximumFractionDigits: user.bonusCurrency === "UAH" ? 0 : 2 }).format(user.bonusBalanceCents / 100) : "none"}</dd></div>
             </dl>
           </section>
           <section className="border border-nord-border bg-nord-card/80 p-6 shadow-survival backdrop-blur-md lg:col-span-2">

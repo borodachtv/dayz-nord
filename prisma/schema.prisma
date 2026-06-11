@@ -65,6 +65,8 @@ model User {
   username    String?
   role        UserRole   @default(USER)
   locale      Locale     @default(RU)
+  bonusBalanceCents Int    @default(0)
+  bonusCurrency String     @default("EUR")
   isBanned    Boolean    @default(false)
   orders      Order[]
   payments    Payment[]
