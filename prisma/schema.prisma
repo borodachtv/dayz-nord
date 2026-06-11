@@ -117,6 +117,9 @@ model Product {
   priceEur    Decimal       @db.Decimal(10, 2)
   priceUah    Decimal       @db.Decimal(10, 2)
   pricePln    Decimal       @db.Decimal(10, 2)
+  compareAtEur Decimal?      @db.Decimal(10, 2)
+  discountPercent Int?
+  saleEndsAt  DateTime?
   currency    String        @default("EUR")
   status      ProductStatus @default(ACTIVE)
   isCosmetic  Boolean       @default(true)

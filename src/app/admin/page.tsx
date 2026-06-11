@@ -23,6 +23,20 @@ function SelectField({ label, options }: { label: string; options: readonly stri
   );
 }
 
+function FileField() {
+  return (
+    <label className="grid gap-2 text-sm text-nord-smoke">
+      Изображение с компьютера
+      <span className="interactive-button flex min-h-14 cursor-pointer items-center justify-between gap-3 border border-nord-border bg-nord-night/60 px-3 text-nord-frost">
+        <span>Выбрать файл PNG / JPG / WEBP</span>
+        <span className="text-xs font-black uppercase text-nord-ice">Upload</span>
+        <input className="sr-only" type="file" accept="image/png,image/jpeg,image/webp" />
+      </span>
+      <span className="text-xs text-nord-smoke">MVP: файл выбирается локально. После подключения backend загрузка будет сохранять изображение в storage и писать URL в PostgreSQL.</span>
+    </label>
+  );
+}
+
 export default function AdminProductsPage() {
   return (
     <main className="min-h-screen bg-nord-night text-nord-frost">
@@ -48,7 +62,17 @@ export default function AdminProductsPage() {
           <Field label="Цена PLN" placeholder="22" type="number" />
           <SelectField label="Категория" options={storeCategories} />
           <SelectField label="Сервер" options={servers.map((server) => `${server.name} | ${server.subtitle}`)} />
-          <Field label="Изображение" placeholder="/uploads/product.png" />
+          <FileField />
+          <div className="grid gap-4 border border-nord-border bg-nord-night/40 p-4">
+            <div>
+              <h3 className="text-lg font-black text-nord-amber">Акция / скидка</h3>
+              <p className="mt-1 text-xs text-nord-smoke">Добавь промо-скидку на конкретный товар.</p>
+            </div>
+            <SelectField label="Акция активна" options={["no", "yes"]} />
+            <Field label="Скидка %" placeholder="15" type="number" />
+            <Field label="Цена до скидки EUR" placeholder="7.99" type="number" />
+            <Field label="Дата окончания акции" placeholder="2026-07-01" type="date" />
+          </div>
           <SelectField label="Статус" options={["active", "inactive"]} />
           <button className="interactive-button border border-nord-amber/60 bg-nord-amber px-4 py-3 font-black text-nord-night" type="button">
             Сохранить товар
@@ -65,6 +89,9 @@ export default function AdminProductsPage() {
                   <span className="text-xs font-black uppercase text-nord-ice">{product.category}</span>
                   <h3 className="mt-3 text-xl font-black">{product.name}</h3>
                   <p className="mt-3 text-sm leading-6 text-nord-smoke">{product.description}</p>
+                  <div className="mt-4 inline-flex border border-nord-amber/50 bg-nord-night/50 px-2 py-1 text-xs font-black uppercase text-nord-amber">
+                    Акция: -15%
+                  </div>
                   <p className="mt-4 text-nord-amber">€{product.price.eur} / ₴{product.price.uah} / zł{product.price.pln}</p>
                   <p className="mt-2 text-sm text-nord-ice">{server?.name}</p>
                   <button className="interactive-link mt-4 text-sm font-bold text-nord-ice" type="button">
