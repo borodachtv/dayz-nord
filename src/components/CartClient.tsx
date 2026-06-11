@@ -52,25 +52,25 @@ export function CartClient() {
     <div className="grid gap-6 lg:grid-cols-[1fr_360px]">
       <div className="grid gap-4">
         {lines.length === 0 ? (
-          <div className="border border-nord-border bg-nord-card/80 p-6 text-nord-smoke shadow-survival backdrop-blur-md">Корзина пуста.</div>
+          <div className="interactive-card border border-nord-border bg-nord-card/80 p-6 text-nord-smoke shadow-survival backdrop-blur-md">Корзина пуста.</div>
         ) : (
           lines.map((item) => (
-            <article key={item.productId} className="grid gap-4 border border-nord-border bg-nord-card/80 p-5 shadow-survival backdrop-blur-md sm:grid-cols-[1fr_auto]">
+            <article key={item.productId} className="interactive-card grid gap-4 border border-nord-border bg-nord-card/80 p-5 shadow-survival backdrop-blur-md sm:grid-cols-[1fr_auto]">
               <div>
                 <h2 className="text-xl font-black">{item.product.name}</h2>
                 <p className="mt-2 text-sm leading-6 text-nord-smoke">{item.product.description}</p>
                 <p className="mt-2 text-sm text-nord-ice">{formatPrice(item.product.price[priceKey], currency)}</p>
               </div>
               <div className="flex items-center gap-2">
-                <button className="h-10 w-10 border border-nord-border" type="button" onClick={() => updateQuantity(item.productId, item.quantity - 1)}>-</button>
+                <button className="interactive-button h-10 w-10 border border-nord-border" type="button" onClick={() => updateQuantity(item.productId, item.quantity - 1)}>-</button>
                 <span className="w-8 text-center font-black">{item.quantity}</span>
-                <button className="h-10 w-10 border border-nord-border" type="button" onClick={() => updateQuantity(item.productId, item.quantity + 1)}>+</button>
+                <button className="interactive-button h-10 w-10 border border-nord-border" type="button" onClick={() => updateQuantity(item.productId, item.quantity + 1)}>+</button>
               </div>
             </article>
           ))
         )}
       </div>
-      <aside className="border border-nord-border bg-nord-card/80 p-6 shadow-survival backdrop-blur-md">
+      <aside className="interactive-card border border-nord-border bg-nord-card/80 p-6 shadow-survival backdrop-blur-md">
         <label className="grid gap-2 text-sm text-nord-smoke">
           Валюта
           <select className="h-12 border border-nord-border bg-nord-night/60 px-3 text-nord-frost" value={currency} onChange={(event) => setCurrency(event.target.value as Currency)}>
@@ -92,7 +92,7 @@ export function CartClient() {
           <span className="text-nord-smoke">Итого</span>
           <strong className="text-2xl text-nord-amber">{formatPrice(total, currency)}</strong>
         </div>
-        <button className="mt-6 w-full border border-nord-amber/60 bg-nord-amber px-5 py-3 font-black text-nord-night" type="button" onClick={pay}>
+        <button className="interactive-button mt-6 w-full border border-nord-amber/60 bg-nord-amber px-5 py-3 font-black text-nord-night" type="button" onClick={pay}>
           Оплатить
         </button>
         {paymentStatus ? <p className="mt-4 text-sm text-nord-ice">{paymentStatus}</p> : null}

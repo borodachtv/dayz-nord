@@ -12,7 +12,7 @@ export default function StorePage() {
         <p className="mt-5 max-w-2xl leading-7 text-nord-smoke">Сначала выберите сервер. По умолчанию здесь нет pay-to-win товаров: только очередь, косметика, декор и добровольная поддержка.</p>
         <div className="mt-8 grid gap-2 lg:grid-cols-3">
           {servers.map((server) => (
-            <a key={server.id} className="border border-nord-border bg-nord-card/80 backdrop-blur-md p-4 font-black text-nord-ice" href={`#${server.id}`}>
+            <a key={server.id} className="interactive-card border border-nord-border bg-nord-card/80 p-4 font-black text-nord-ice backdrop-blur-md" href={`#${server.id}`}>
               {server.name} | {server.subtitle}
             </a>
           ))}
@@ -27,11 +27,11 @@ export default function StorePage() {
             <h2 className="text-3xl font-black">{server.name} | {server.subtitle}</h2>
             <div className="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
               {products.filter((product) => product.serverId === server.id).map((product) => (
-                <article key={product.id} className="overflow-hidden border border-nord-border bg-nord-card/80 backdrop-blur-md shadow-survival">
-                  <div className="h-44 bg-[url('/dayz-nord-hero.png')] bg-cover bg-center" />
+                <article key={product.id} className="interactive-product overflow-hidden border border-nord-border bg-nord-card/80 shadow-survival backdrop-blur-md">
+                  <div className="product-media h-44 bg-[url('/dayz-nord-hero.png')] bg-cover bg-center" />
                   <div className="p-5">
                     <span className="text-xs font-black uppercase text-nord-ice">{product.category}</span>
-                    <h3 className="mt-3 text-2xl font-black">{product.name}</h3>
+                    <h3 className="mt-3 text-2xl font-black transition hover:text-nord-ice">{product.name}</h3>
                     <p className="mt-3 min-h-20 text-sm leading-6 text-nord-smoke">{product.description}</p>
                     <div className="mt-4 grid gap-1 text-sm text-nord-smoke">
                       <span>EUR {formatPrice(product.price.eur, "EUR")}</span>

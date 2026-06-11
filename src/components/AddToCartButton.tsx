@@ -16,7 +16,7 @@ export function AddToCartButton({ productId }: { productId: string }) {
 
   return (
     <button
-      className="mt-4 w-full border border-nord-amber/60 bg-nord-amber px-4 py-3 font-black text-nord-night transition hover:brightness-110"
+      className="interactive-button mt-4 w-full border border-nord-amber/60 bg-nord-amber px-4 py-3 font-black text-nord-night transition hover:brightness-110"
       type="button"
       onClick={addToCart}
     >

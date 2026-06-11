@@ -13,7 +13,7 @@ export function CopyIpButton({ ip }: { ip: string }) {
 
   return (
     <button
-      className="border border-nord-border bg-nord-night/50 px-4 py-3 text-sm font-bold text-nord-ice"
+      className="interactive-button border border-nord-border bg-nord-night/50 px-4 py-3 text-sm font-bold text-nord-ice"
       type="button"
       onClick={copy}
     >

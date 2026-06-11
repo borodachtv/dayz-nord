@@ -36,9 +36,9 @@ export function Header() {
   return (
     <header className="fixed inset-x-0 top-0 z-40 border-b border-nord-border bg-nord-night/88 px-4 py-3 backdrop-blur-xl sm:px-6 lg:px-10">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4">
-        <Link href="/" className="flex min-w-max items-center gap-3">
-          <span className="grid h-11 w-11 place-items-center border border-nord-ice/40 bg-nord-card/80 backdrop-blur-md font-black text-nord-ice">
-            DN
+        <Link href="/" className="interactive-link flex min-w-max items-center gap-3">
+          <span className="glow-pulse grid h-12 w-12 place-items-center overflow-hidden rounded-full border border-nord-ice/40 bg-nord-card/80 p-1 backdrop-blur-md">
+            <img className="h-full w-full rounded-full object-cover" src="/nord-logo.png" alt="DayZ Nord logo" />
           </span>
           <span>
             <strong className="block leading-tight">DayZ Nord</strong>
@@ -69,7 +69,7 @@ export function Header() {
             <Link
               key={href}
               href={href}
-              className="border-b border-nord-border py-3 text-sm text-nord-smoke transition hover:text-nord-frost lg:border-0 lg:px-2.5 lg:py-2"
+              className="interactive-link border-b border-nord-border py-3 text-sm text-nord-smoke transition hover:text-nord-frost lg:border-0 lg:px-2.5 lg:py-2"
               onClick={() => setOpen(false)}
             >
               {label}
@@ -79,7 +79,7 @@ export function Header() {
             href="https://discord.com/"
             target="_blank"
             rel="noreferrer"
-            className="py-3 text-sm font-bold text-nord-ice transition hover:text-nord-frost lg:px-2.5 lg:py-2"
+            className="interactive-link py-3 text-sm font-bold text-nord-ice transition hover:text-nord-frost lg:px-2.5 lg:py-2"
           >
             {t.discord}
           </a>

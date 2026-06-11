@@ -38,6 +38,7 @@ body::before {
     radial-gradient(circle, rgba(125, 211, 252, 0.34) 0 1px, transparent 1.8px);
   background-position: 0 0, 74px 38px;
   background-size: 140px 140px, 220px 220px;
+  animation: snow-drift 26s linear infinite;
 }
 
 body::after {
@@ -53,6 +54,7 @@ body::after {
     radial-gradient(ellipse at 22% 72%, rgba(125, 211, 252, 0.16), transparent 54%),
     radial-gradient(ellipse at 74% 58%, rgba(229, 231, 235, 0.12), transparent 50%);
   filter: blur(26px);
+  animation: fog-breathe 12s ease-in-out infinite alternate;
 }
 
 button,
@@ -71,6 +73,7 @@ select {
     radial-gradient(circle at 70% 40%, rgba(229, 231, 235, 0.1) 0 1px, transparent 1px),
     repeating-linear-gradient(90deg, rgba(125, 211, 252, 0.035) 0 1px, transparent 1px 92px);
   background-size: 180px 180px, 260px 260px, auto;
+  animation: grid-drift 18s linear infinite;
 }
 
 .frost-panel {
@@ -85,5 +88,146 @@ select {
     linear-gradient(rgba(125, 211, 252, 0.05) 1px, transparent 1px),
     linear-gradient(90deg, rgba(125, 211, 252, 0.05) 1px, transparent 1px);
   background-size: 42px 42px;
+}
+
+.hero-pan {
+  animation: hero-pan 22s ease-in-out infinite alternate;
+  transform-origin: center;
+}
+
+.reveal-up {
+  animation: reveal-up 760ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.reveal-delay-1 {
+  animation-delay: 110ms;
+}
+
+.reveal-delay-2 {
+  animation-delay: 220ms;
+}
+
+.reveal-delay-3 {
+  animation-delay: 330ms;
+}
+
+.interactive-link,
+.interactive-button,
+.interactive-card,
+.interactive-product {
+  position: relative;
+  transition:
+    transform 220ms ease,
+    border-color 220ms ease,
+    box-shadow 220ms ease,
+    color 220ms ease,
+    background 220ms ease,
+    filter 220ms ease;
+}
+
+.interactive-link:hover,
+.interactive-link:focus-visible {
+  color: #E5E7EB;
+  text-shadow: 0 0 18px rgba(125, 211, 252, 0.44);
+}
+
+.interactive-button:hover,
+.interactive-button:focus-visible {
+  transform: translateY(-2px);
+  border-color: rgba(125, 211, 252, 0.72);
+  box-shadow: 0 0 0 1px rgba(125, 211, 252, 0.16), 0 0 30px rgba(125, 211, 252, 0.18);
+}
+
+.interactive-button:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.interactive-card:hover,
+.interactive-product:hover {
+  transform: translateY(-6px);
+  border-color: rgba(125, 211, 252, 0.68);
+  box-shadow: 0 26px 80px rgba(0, 0, 0, 0.48), 0 0 34px rgba(125, 211, 252, 0.16);
+}
+
+.interactive-product:hover .product-media {
+  transform: scale(1.06);
+  filter: saturate(1.15) brightness(1.08);
+}
+
+.product-media {
+  transition: transform 500ms ease, filter 500ms ease;
+}
+
+.glow-pulse {
+  animation: glow-pulse 2.8s ease-in-out infinite;
+}
+
+@keyframes snow-drift {
+  from {
+    background-position: 0 0, 74px 38px;
+  }
+  to {
+    background-position: 180px 320px, -60px 420px;
+  }
+}
+
+@keyframes fog-breathe {
+  from {
+    opacity: 0.52;
+    transform: translate3d(-1.5vw, 0, 0) scale(1);
+  }
+  to {
+    opacity: 0.86;
+    transform: translate3d(1.5vw, -2vh, 0) scale(1.05);
+  }
+}
+
+@keyframes grid-drift {
+  from {
+    background-position: 0 0, 0 0, 0 0;
+  }
+  to {
+    background-position: 180px 120px, -160px 190px, 92px 0;
+  }
+}
+
+@keyframes hero-pan {
+  from {
+    transform: scale(1.03) translate3d(-0.7%, 0, 0);
+  }
+  to {
+    transform: scale(1.08) translate3d(0.9%, -0.7%, 0);
+  }
+}
+
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes glow-pulse {
+  0%, 100% {
+    box-shadow: 0 0 24px rgba(125, 211, 252, 0.16);
+  }
+  50% {
+    box-shadow: 0 0 38px rgba(125, 211, 252, 0.34), 0 0 16px rgba(163, 230, 53, 0.18);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 

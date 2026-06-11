@@ -39,7 +39,7 @@ export default function AdminProductsPage() {
       </header>
 
       <div className="mx-auto grid max-w-7xl gap-6 px-4 py-8 sm:px-6 lg:grid-cols-[420px_1fr] lg:px-10">
-        <form className="grid gap-4 border border-nord-border bg-nord-card/80 p-5 shadow-survival backdrop-blur-md">
+        <form className="interactive-card grid gap-4 border border-nord-border bg-nord-card/80 p-5 shadow-survival backdrop-blur-md">
           <h2 className="text-2xl font-black">Создать товар</h2>
           <Field label="Название" placeholder="Custom Flag" />
           <Field label="Описание" placeholder="Cosmetic item without gameplay advantage" />
@@ -50,7 +50,7 @@ export default function AdminProductsPage() {
           <SelectField label="Сервер" options={servers.map((server) => `${server.name} | ${server.subtitle}`)} />
           <Field label="Изображение" placeholder="/uploads/product.png" />
           <SelectField label="Статус" options={["active", "inactive"]} />
-          <button className="border border-nord-amber/60 bg-nord-amber px-4 py-3 font-black text-nord-night" type="button">
+          <button className="interactive-button border border-nord-amber/60 bg-nord-amber px-4 py-3 font-black text-nord-night" type="button">
             Сохранить товар
           </button>
         </form>
@@ -61,13 +61,13 @@ export default function AdminProductsPage() {
             {products.map((product) => {
               const server = servers.find((item) => item.id === product.serverId);
               return (
-                <article key={product.id} className="border border-nord-border bg-nord-card/80 p-5 shadow-survival backdrop-blur-md">
+                <article key={product.id} className="interactive-product border border-nord-border bg-nord-card/80 p-5 shadow-survival backdrop-blur-md">
                   <span className="text-xs font-black uppercase text-nord-ice">{product.category}</span>
                   <h3 className="mt-3 text-xl font-black">{product.name}</h3>
                   <p className="mt-3 text-sm leading-6 text-nord-smoke">{product.description}</p>
                   <p className="mt-4 text-nord-amber">€{product.price.eur} / ₴{product.price.uah} / zł{product.price.pln}</p>
                   <p className="mt-2 text-sm text-nord-ice">{server?.name}</p>
-                  <button className="mt-4 text-sm font-bold text-nord-ice" type="button">
+                  <button className="interactive-link mt-4 text-sm font-bold text-nord-ice" type="button">
                     active / inactive
                   </button>
                 </article>
