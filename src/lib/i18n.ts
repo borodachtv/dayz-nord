@@ -1,6 +1,13 @@
 export const languages = ["RU", "UA", "EN", "PL"] as const;
 export type Language = (typeof languages)[number];
 
+export const languageCurrency = {
+  RU: "EUR",
+  UA: "UAH",
+  EN: "EUR",
+  PL: "PLN"
+} as const;
+
 export const labels: Record<Language, Record<string, string>> = {
   RU: {
     home: "Главная",

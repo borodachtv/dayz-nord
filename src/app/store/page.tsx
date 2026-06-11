@@ -1,6 +1,6 @@
 ﻿import { AddToCartButton } from "@/components/AddToCartButton";
 import { PageShell } from "@/components/PageShell";
-import { formatPrice } from "@/lib/cart";
+import { ProductPrice } from "@/components/ProductPrice";
 import { products, servers, storeCategories } from "@/lib/site-data";
 
 export default function StorePage() {
@@ -33,12 +33,8 @@ export default function StorePage() {
                     <span className="text-xs font-black uppercase text-nord-ice">{product.category}</span>
                     <h3 className="mt-3 text-2xl font-black transition hover:text-nord-ice">{product.name}</h3>
                     <p className="mt-3 min-h-20 text-sm leading-6 text-nord-smoke">{product.description}</p>
-                    <div className="mt-4 grid gap-1 text-sm text-nord-smoke">
-                      <span>EUR {formatPrice(product.price.eur, "EUR")}</span>
-                      <span>UAH {formatPrice(product.price.uah, "UAH")}</span>
-                      <span>PLN {formatPrice(product.price.pln, "PLN")}</span>
-                      <span className="text-nord-ice">Сервер: {server.name}</span>
-                    </div>
+                    <ProductPrice price={product.price} />
+                    <div className="mt-2 text-sm text-nord-ice">Сервер: {server.name}</div>
                     <AddToCartButton productId={product.id} />
                   </div>
                 </article>
@@ -50,4 +46,5 @@ export default function StorePage() {
     </PageShell>
   );
 }
+
 

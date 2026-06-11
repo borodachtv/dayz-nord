@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { cartStorageKey, formatPrice, getProduct, type CartItem } from "@/lib/cart";
+import { languageCurrency, languages, type Language } from "@/lib/i18n";
 import { currencies, type Currency } from "@/lib/site-data";
 
 export function CartClient() {
@@ -15,9 +16,22 @@ export function CartClient() {
       setItems(JSON.parse(localStorage.getItem(cartStorageKey) ?? "[]") as CartItem[]);
     }
 
+    const savedLanguage = localStorage.getItem("dayz-nord-language");
+    if (savedLanguage && languages.includes(savedLanguage as Language)) {
+      setCurrency(languageCurrency[savedLanguage as Language]);
+    }
+
+    function updateLanguage(event: Event) {
+      setCurrency(languageCurrency[(event as CustomEvent<Language>).detail]);
+    }
+
     load();
     window.addEventListener("cart:update", load);
-    return () => window.removeEventListener("cart:update", load);
+    window.addEventListener("language:update", updateLanguage);
+    return () => {
+      window.removeEventListener("cart:update", load);
+      window.removeEventListener("language:update", updateLanguage);
+    };
   }, []);
 
   const lines = items
