@@ -1,23 +1,22 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function GET() {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
-  const response = NextResponse.redirect(new URL("/profile", baseUrl));
+function publicOrigin(request: NextRequest) {
+  return process.env.NEXT_PUBLIC_SITE_URL ?? request.nextUrl.origin;
+}
 
-  response.cookies.set(
-    "dayz_nord_mock_user",
-    JSON.stringify({
-      steamId64: "76561198000000001",
-      username: "NordSurvivor",
-      role: "USER"
-    }),
-    {
-      httpOnly: true,
-      sameSite: "lax",
-      path: "/",
-      maxAge: 60 * 60 * 24 * 7
-    }
-  );
+export async function GET(request: NextRequest) {
+  const origin = publicOrigin(request);
+  const returnTo = process.env.STEAM_OPENID_RETURN_URL ?? `${origin}/api/auth/steam/callback`;
+  const realm = process.env.STEAM_OPENID_REALM ?? origin;
 
-  return response;
+  const params = new URLSearchParams({
+    "openid.ns": "http://specs.openid.net/auth/2.0",
+    "openid.mode": "checkid_setup",
+    "openid.return_to": returnTo,
+    "openid.realm": realm,
+    "openid.identity": "http://specs.openid.net/auth/2.0/identifier_select",
+    "openid.claimed_id": "http://specs.openid.net/auth/2.0/identifier_select"
+  });
+
+  return NextResponse.redirect(`https://steamcommunity.com/openid/login?${params.toString()}`);
 }

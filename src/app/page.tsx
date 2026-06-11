@@ -23,7 +23,7 @@ export default function HomePage() {
             <div className="reveal-up reveal-delay-3 mt-8 flex flex-wrap gap-3">
               <Link className="interactive-button border border-nord-amber/60 bg-nord-amber px-5 py-3 font-black text-nord-night" href="/store">Магазин</Link>
               <Link className="interactive-button border border-nord-border bg-nord-card/70 px-5 py-3 font-bold backdrop-blur-md" href="/cart">Корзина</Link>
-              <Link className="interactive-button border border-nord-border bg-nord-card/70 px-5 py-3 font-bold backdrop-blur-md" href="/login">Steam mock</Link>
+              <Link className="interactive-button border border-nord-border bg-nord-card/70 px-5 py-3 font-bold backdrop-blur-md" href="/login">Steam login</Link>
               <Link className="interactive-button border border-nord-border bg-nord-card/70 px-5 py-3 font-bold backdrop-blur-md" href="/admin">Admin</Link>
             </div>
           </div>

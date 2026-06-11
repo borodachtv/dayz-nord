@@ -49,6 +49,13 @@ For MVP preview, only this is needed:
 NEXT_PUBLIC_SITE_URL=https://your-project.vercel.app
 ```
 
+For Steam OpenID on production, set:
+
+```text
+STEAM_OPENID_REALM=https://your-project.vercel.app
+STEAM_OPENID_RETURN_URL=https://your-project.vercel.app/api/auth/steam/callback
+```
+
 PostgreSQL can be added later. The MVP currently uses mock data from `src/lib/site-data.ts`.
 
 When PostgreSQL is ready, add:
@@ -82,6 +89,6 @@ https://dayz-nord.vercel.app
 
 ## Notes
 
-- Steam login is a mock route for MVP.
+- Steam login uses Steam OpenID.
 - Payments are mock checkout endpoints for MVP.
 - Admin products use mock data until CRUD API is connected to PostgreSQL.
