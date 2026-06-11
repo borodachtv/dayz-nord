@@ -1,0 +1,89 @@
+﻿@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+  background: #05070A;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  overflow-x: hidden;
+  background:
+    radial-gradient(circle at 18% 4%, rgba(125, 211, 252, 0.12), transparent 28rem),
+    radial-gradient(circle at 82% 12%, rgba(163, 230, 53, 0.06), transparent 24rem),
+    linear-gradient(180deg, #05070A 0%, #071017 46%, #05070A 100%);
+  color: #E5E7EB;
+}
+
+body::before {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  pointer-events: none;
+  content: "";
+  opacity: 0.28;
+  background-image:
+    radial-gradient(circle, rgba(229, 231, 235, 0.72) 0 1px, transparent 1.6px),
+    radial-gradient(circle, rgba(125, 211, 252, 0.34) 0 1px, transparent 1.8px);
+  background-position: 0 0, 74px 38px;
+  background-size: 140px 140px, 220px 220px;
+}
+
+body::after {
+  position: fixed;
+  left: -10vw;
+  right: -10vw;
+  bottom: -18vh;
+  z-index: 29;
+  height: 42vh;
+  pointer-events: none;
+  content: "";
+  background:
+    radial-gradient(ellipse at 22% 72%, rgba(125, 211, 252, 0.16), transparent 54%),
+    radial-gradient(ellipse at 74% 58%, rgba(229, 231, 235, 0.12), transparent 50%);
+  filter: blur(26px);
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+::selection {
+  background: rgba(125, 211, 252, 0.34);
+}
+
+.noise {
+  background-image:
+    radial-gradient(circle at 20% 20%, rgba(229, 231, 235, 0.14) 0 1px, transparent 1px),
+    radial-gradient(circle at 70% 40%, rgba(229, 231, 235, 0.1) 0 1px, transparent 1px),
+    repeating-linear-gradient(90deg, rgba(125, 211, 252, 0.035) 0 1px, transparent 1px 92px);
+  background-size: 180px 180px, 260px 260px, auto;
+}
+
+.frost-panel {
+  border: 1px solid #263238;
+  background: rgba(16, 24, 32, 0.78);
+  box-shadow: 0 22px 70px rgba(0, 0, 0, 0.38), 0 0 28px rgba(125, 211, 252, 0.08);
+  backdrop-filter: blur(16px);
+}
+
+.military-grid {
+  background-image:
+    linear-gradient(rgba(125, 211, 252, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(125, 211, 252, 0.05) 1px, transparent 1px);
+  background-size: 42px 42px;
+}
+
