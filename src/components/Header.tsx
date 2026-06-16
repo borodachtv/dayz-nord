@@ -1,6 +1,7 @@
 ﻿"use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { labels, languages, type Language } from "@/lib/i18n";
@@ -8,6 +9,7 @@ import { labels, languages, type Language } from "@/lib/i18n";
 export function Header() {
   const [open, setOpen] = useState(false);
   const [language, setLanguage] = useState<Language>("RU");
+  const pathname = usePathname();
   const t = labels[language];
 
   useEffect(() => {
@@ -34,10 +36,10 @@ export function Header() {
   ] as const;
 
   return (
-    <header className="fixed inset-x-0 top-0 z-40 border-b border-nord-border bg-nord-night/88 px-4 py-3 backdrop-blur-xl sm:px-6 lg:px-10">
+    <header className="fixed inset-x-0 top-0 z-40 border-b border-nord-border bg-nord-night/82 px-4 py-3 shadow-[0_18px_60px_rgba(0,0,0,0.3)] backdrop-blur-xl sm:px-6 lg:px-10">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4">
         <Link href="/" className="interactive-link flex min-w-max items-center gap-3">
-          <span className="glow-pulse grid h-12 w-12 place-items-center overflow-hidden rounded-full border border-nord-ice/40 bg-nord-card/80 p-1 backdrop-blur-md">
+          <span className="glow-pulse grid h-12 w-12 place-items-center overflow-hidden rounded-full border border-nord-ice/40 bg-nord-card/80 p-1 shadow-[0_0_0_4px_rgba(125,211,252,0.06)] backdrop-blur-md">
             <img className="h-full w-full rounded-full object-cover" src="/nord-logo.png" alt="DayZ Nord logo" />
           </span>
           <span>
@@ -47,7 +49,7 @@ export function Header() {
         </Link>
 
         <button
-          className="grid h-11 w-11 place-items-center border border-nord-border bg-nord-card/80 backdrop-blur-md lg:hidden"
+          className="interactive-button grid h-11 w-11 place-items-center border border-nord-border bg-nord-card/80 backdrop-blur-md lg:hidden"
           type="button"
           aria-label="Open menu"
           aria-expanded={open}
@@ -69,7 +71,11 @@ export function Header() {
             <Link
               key={href}
               href={href}
-              className="interactive-link border-b border-nord-border py-3 text-sm text-nord-smoke transition hover:text-nord-frost lg:border-0 lg:px-2.5 lg:py-2"
+              className={`interactive-link border-b border-nord-border py-3 text-sm transition hover:text-nord-frost lg:border lg:px-3 lg:py-2 ${
+                pathname === href || (href !== "/" && pathname.startsWith(href))
+                  ? "border-nord-ice/40 bg-nord-card/72 text-nord-frost"
+                  : "border-transparent text-nord-smoke lg:bg-transparent"
+              }`}
               onClick={() => setOpen(false)}
             >
               {label}

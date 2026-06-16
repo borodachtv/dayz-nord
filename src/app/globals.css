@@ -83,6 +83,102 @@ select {
   backdrop-filter: blur(16px);
 }
 
+.nord-shell {
+  position: relative;
+  border: 1px solid rgba(125, 211, 252, 0.18);
+  background:
+    linear-gradient(135deg, rgba(125, 211, 252, 0.1), transparent 32%),
+    linear-gradient(180deg, rgba(16, 24, 32, 0.86), rgba(5, 7, 10, 0.86));
+  box-shadow: 0 28px 90px rgba(0, 0, 0, 0.48), inset 0 1px 0 rgba(229, 231, 235, 0.06);
+  backdrop-filter: blur(18px);
+}
+
+.nord-shell::before {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  content: "";
+  background:
+    linear-gradient(90deg, rgba(125, 211, 252, 0.22), transparent 18%, transparent 82%, rgba(125, 211, 252, 0.18)),
+    repeating-linear-gradient(90deg, rgba(125, 211, 252, 0.045) 0 1px, transparent 1px 72px);
+  opacity: 0.48;
+}
+
+.nord-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  color: #7DD3FC;
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.nord-kicker::before {
+  display: block;
+  width: 1.8rem;
+  height: 1px;
+  content: "";
+  background: linear-gradient(90deg, #7DD3FC, transparent);
+}
+
+.nord-button-primary,
+.nord-button-secondary {
+  display: inline-flex;
+  min-height: 2.9rem;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid;
+  padding: 0.75rem 1.05rem;
+  font-size: 0.88rem;
+  font-weight: 900;
+  line-height: 1;
+  text-align: center;
+}
+
+.nord-button-primary {
+  border-color: rgba(163, 230, 53, 0.72);
+  background: linear-gradient(135deg, #A3E635, #7DD3FC);
+  color: #05070A;
+}
+
+.nord-button-secondary {
+  border-color: rgba(125, 211, 252, 0.26);
+  background: rgba(16, 24, 32, 0.72);
+  color: #E5E7EB;
+  backdrop-filter: blur(14px);
+}
+
+.nord-button-primary:hover,
+.nord-button-secondary:hover {
+  filter: brightness(1.06);
+}
+
+.status-dot {
+  display: inline-flex;
+  width: 0.52rem;
+  height: 0.52rem;
+  border-radius: 999px;
+  box-shadow: 0 0 16px currentColor;
+}
+
+.scanline {
+  position: relative;
+  overflow: hidden;
+}
+
+.scanline::after {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  content: "";
+  background: linear-gradient(180deg, transparent, rgba(125, 211, 252, 0.1), transparent);
+  transform: translateY(-100%);
+  animation: scanline 5.8s ease-in-out infinite;
+}
+
 .military-grid {
   background-image:
     linear-gradient(rgba(125, 211, 252, 0.05) 1px, transparent 1px),
@@ -217,6 +313,15 @@ select {
   }
   50% {
     box-shadow: 0 0 38px rgba(125, 211, 252, 0.34), 0 0 16px rgba(163, 230, 53, 0.18);
+  }
+}
+
+@keyframes scanline {
+  0%, 18% {
+    transform: translateY(-100%);
+  }
+  46%, 100% {
+    transform: translateY(100%);
   }
 }
 

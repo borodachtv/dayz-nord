@@ -11,6 +11,7 @@ type ProductPriceProps = {
     uah: number;
     pln: number;
   };
+  className?: string;
 };
 
 const priceKeyByCurrency = {
@@ -19,7 +20,7 @@ const priceKeyByCurrency = {
   PLN: "pln"
 } as const satisfies Record<Currency, keyof ProductPriceProps["price"]>;
 
-export function ProductPrice({ price }: ProductPriceProps) {
+export function ProductPrice({ price, className = "" }: ProductPriceProps) {
   const [language, setLanguage] = useState<Language>("RU");
 
   useEffect(() => {
@@ -40,7 +41,7 @@ export function ProductPrice({ price }: ProductPriceProps) {
   const priceKey = priceKeyByCurrency[currency];
 
   return (
-    <div className="mt-4">
+    <div className={className}>
       <span className="text-2xl font-black text-nord-amber">{formatPrice(price[priceKey], currency)}</span>
       <span className="ml-2 text-xs font-black uppercase text-nord-smoke">{currency}</span>
     </div>
