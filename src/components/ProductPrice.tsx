@@ -7,9 +7,9 @@ import type { Currency } from "@/lib/site-data";
 
 type ProductPriceProps = {
   price: {
-    eur: number;
-    uah: number;
-    pln: number;
+    readonly eur: number;
+    readonly uah: number;
+    readonly pln: number;
   };
   className?: string;
 };

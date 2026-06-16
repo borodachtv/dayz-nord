@@ -290,6 +290,20 @@ select {
   box-shadow: 0 0 0 1px rgba(125, 211, 252, 0.16), 0 14px 34px rgba(0, 0, 0, 0.44);
 }
 
+.product-compact-card {
+  min-height: 31rem;
+}
+
+.product-compact-card .product-slot {
+  margin-top: 0.75rem;
+  transform: translateY(-0.2rem);
+}
+
+.product-detail-card {
+  max-height: min(86vh, 780px);
+  overflow-y: auto;
+}
+
 .rust-cart-button {
   position: relative;
   min-height: 4.25rem;

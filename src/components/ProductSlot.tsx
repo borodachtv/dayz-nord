@@ -1,12 +1,13 @@
 type ProductSlotProps = {
   image?: string;
   name: string;
-  size?: "sm" | "lg";
+  size?: "sm" | "md" | "lg";
 };
 
 const sizeClass = {
   sm: "h-[50px] w-[50px]",
-  lg: "h-[50px] w-[50px]"
+  md: "h-40 w-40",
+  lg: "h-56 w-56 sm:h-64 sm:w-64"
 } as const;
 
 export function ProductSlot({ image, name, size = "sm" }: ProductSlotProps) {
