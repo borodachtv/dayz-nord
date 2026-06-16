@@ -1,5 +1,7 @@
 import Link from "next/link";
+import { AdminProductImageField } from "@/components/AdminProductImageField";
 import { AdminUsersPanel } from "@/components/AdminUsersPanel";
+import { ProductSlot } from "@/components/ProductSlot";
 import { products, servers, storeCategories } from "@/lib/site-data";
 
 function Field({ label, placeholder, type = "text" }: { label: string; placeholder: string; type?: string }) {
@@ -63,7 +65,7 @@ export default function AdminProductsPage() {
           <Field label="Цена PLN" placeholder="22" type="number" />
           <SelectField label="Категория" options={storeCategories} />
           <SelectField label="Сервер" options={servers.map((server) => `${server.name} | ${server.subtitle}`)} />
-          <FileField />
+          <AdminProductImageField />
           <div className="grid gap-4 border border-nord-border bg-nord-night/40 p-4">
             <div>
               <h3 className="text-lg font-black text-nord-amber">Акция / скидка</h3>
@@ -87,7 +89,10 @@ export default function AdminProductsPage() {
               const server = servers.find((item) => item.id === product.serverId);
               return (
                 <article key={product.id} className="interactive-product border border-nord-border bg-nord-card/80 p-5 shadow-survival backdrop-blur-md">
-                  <span className="text-xs font-black uppercase text-nord-ice">{product.category}</span>
+                  <div className="flex items-center gap-4">
+                    <ProductSlot image={product.image} name={product.name} />
+                    <span className="text-xs font-black uppercase text-nord-ice">{product.category}</span>
+                  </div>
                   <h3 className="mt-3 text-xl font-black">{product.name}</h3>
                   <p className="mt-3 text-sm leading-6 text-nord-smoke">{product.description}</p>
                   <div className="mt-4 inline-flex border border-nord-amber/50 bg-nord-night/50 px-2 py-1 text-xs font-black uppercase text-nord-amber">

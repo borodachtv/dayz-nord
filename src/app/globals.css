@@ -254,6 +254,42 @@ select {
   transition: transform 500ms ease, filter 500ms ease;
 }
 
+.product-slot {
+  position: relative;
+  flex: 0 0 auto;
+  overflow: hidden;
+  border: 1px solid rgba(125, 211, 252, 0.24);
+  background:
+    linear-gradient(180deg, rgba(5, 7, 10, 0.18), rgba(5, 7, 10, 0.3)),
+    url("/product-card-base.jpg") center / cover no-repeat;
+  box-shadow: 0 0 0 1px rgba(5, 7, 10, 0.72), 0 10px 28px rgba(0, 0, 0, 0.36);
+  image-rendering: auto;
+}
+
+.product-slot::after {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  content: "";
+  background: radial-gradient(circle at 50% 42%, rgba(163, 230, 53, 0.14), transparent 58%);
+  opacity: 0.78;
+}
+
+.product-slot-item {
+  position: absolute;
+  inset: 8%;
+  z-index: 1;
+  width: 84%;
+  height: 84%;
+  object-fit: contain;
+  filter: drop-shadow(0 7px 10px rgba(0, 0, 0, 0.72));
+}
+
+.interactive-product:hover .product-slot {
+  border-color: rgba(125, 211, 252, 0.58);
+  box-shadow: 0 0 0 1px rgba(125, 211, 252, 0.16), 0 14px 34px rgba(0, 0, 0, 0.44);
+}
+
 .rust-cart-button {
   position: relative;
   min-height: 4.25rem;

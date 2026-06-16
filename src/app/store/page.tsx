@@ -1,6 +1,7 @@
 ﻿import { AddToCartButton } from "@/components/AddToCartButton";
 import { PageShell } from "@/components/PageShell";
 import { ProductPrice } from "@/components/ProductPrice";
+import { ProductSlot } from "@/components/ProductSlot";
 import { products, servers, storeCategories } from "@/lib/site-data";
 
 export default function StorePage() {
@@ -50,10 +51,12 @@ export default function StorePage() {
             <div className="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
               {products.filter((product) => product.serverId === server.id).map((product) => (
                 <article key={product.id} className="interactive-product nord-shell overflow-hidden">
-                  <div className="relative h-48 overflow-hidden border-b border-nord-border">
-                    <div className="product-media absolute inset-0 bg-[url('/dayz-nord-hero.png')] bg-cover bg-center" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-nord-night via-transparent to-transparent" />
-                    <span className="absolute bottom-3 left-4 border border-nord-ice/30 bg-nord-night/72 px-2 py-1 text-[11px] font-black uppercase text-nord-ice backdrop-blur-md">{product.category}</span>
+                  <div className="relative flex min-h-28 items-center gap-4 border-b border-nord-border bg-nord-night/45 p-5">
+                    <ProductSlot image={product.image} name={product.name} />
+                    <div className="relative min-w-0">
+                      <span className="border border-nord-ice/30 bg-nord-night/72 px-2 py-1 text-[11px] font-black uppercase text-nord-ice backdrop-blur-md">{product.category}</span>
+                      <div className="mt-3 font-mono text-xs uppercase text-nord-smoke">50x50 inventory card</div>
+                    </div>
                   </div>
                   <div className="relative p-5">
                     <h3 className="text-2xl font-black transition hover:text-nord-ice">{product.name}</h3>
