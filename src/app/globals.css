@@ -259,9 +259,7 @@ select {
   min-height: 4.25rem;
   overflow: hidden;
   border: 0;
-  background:
-    linear-gradient(90deg, rgba(5, 7, 10, 0.62), transparent 28%, transparent 72%, rgba(5, 7, 10, 0.62)),
-    url("/cart-button-rust.jpg") center / 100% 100% no-repeat;
+  background: url("/cart-button-rust.png") center / 100% 100% no-repeat;
   color: #F8FAFC;
   text-shadow:
     0 2px 3px rgba(0, 0, 0, 0.95),
